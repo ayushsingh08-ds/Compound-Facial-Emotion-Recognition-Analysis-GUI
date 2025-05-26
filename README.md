@@ -1,69 +1,114 @@
 # Compound-Facial-Emotion-Recognition-Analysis-GUI
 
-This project implements a GUI-based system for detecting **compound facial emotions** using machine learning and deep learning techniques. The system includes data preprocessing, model training, and a MATLAB GUI for real-time emotion recognition via webcam.
-
-## 🔧 Features
-
-- 📊 **Data Preprocessing**: Normalization and dimensionality reduction for efficient training.
-- 🧠 **CNN-based Emotion Classification**: Custom-trained CNN to classify basic and compound emotions.
-- 🎛️ **MATLAB GUI**: Interactive GUI (`EMOTION_DETECTION_GUI_APP.m`) for real-time detection using webcam input.
-- 📈 **Performance Metrics**: Visualizations include training accuracy, confusion matrix, and confidence bars.
-- 📂 **Model Files**: Includes pre-trained `.mat` models for immediate testing.
+A MATLAB-based system for real-time **compound facial emotion recognition**, leveraging a custom-built dataset, deep learning (CNN), and a GUI interface with webcam support.
 
 ---
 
-## 🗂️ File Structure
+## 🧠 Project Overview
 
-| File Name | Description |
-|----------|-------------|
-| `EMOTION_DETECTION_GUI_APP.m` | MATLAB GUI script for real-time webcam-based emotion detection |
+This project follows a full machine learning pipeline:
+1. **Data Preprocessing** – Prepares grayscale facial images from a custom Compound_Emotion dataset.
+2. **Model Training** – Trains a lightweight CNN to classify compound emotions.
+3. **Real-Time GUI** – Deploys the model in a MATLAB-based GUI using a webcam for live emotion detection.
+
+---
+
+## 📁 Project Structure
+
+| File | Description |
+|------|-------------|
+| `compound DATA.ipynb` | Prepares dataset: resizes, normalizes, labels images by emotion class |
+| `compound_emotion_cleaned.mat` | Final dataset split into train/val/test (80/10/10) |
+| `model train.mlx` | MATLAB code to train CNN using data augmentation, Adam optimizer, and early stopping |
 | `EmotionRecognitionModel.mat` | Trained CNN model |
-| `EmotionRecognitionModel2.mat` | Alternative or secondary trained model |
-| `compound DATA.ipynb` | Jupyter notebook for dataset handling and preprocessing |
-| `compound_emotion_cleaned.mat` | Cleaned and processed dataset |
-| `data normalization,reduction.ipynb` | Feature scaling and PCA or other reduction technique |
-| `model train.mlx` | MATLAB live script for training the emotion recognition model |
-| `accuracy.jpg`, `confusion.jpg`, `training chart.jpg` | Visualizations of model performance |
+| `EMOTION_DETECTION_GUI_APP.m` / `emotionRecognitionLive` | Real-time GUI app for webcam-based emotion detection |
+| `accuracy.jpg`, `confusion.jpg`, `training chart.jpg` | Visual evaluation of model performance |
+| `data normalization,reduction.ipynb` | Data transformation (e.g., PCA, scaling) |
+| `EmotionRecognitionModel2.mat` | Alternative model version for experimentation |
 
 ---
 
-## ▶️ How to Run
+## 🔬 Custom Dataset Creation
 
-### 📌 Prerequisites
-- MATLAB (Recommended version: R2021a or later)
-- Deep Learning Toolbox
-- Python (for Jupyter notebooks if needed)
-
-### 🧪 Running the GUI
-1. Open `EMOTION_DETECTION_GUI_APP.m` in MATLAB.
-2. Run the script.
-3. Ensure webcam is connected.
-4. The GUI will display live webcam feed with predicted emotion and confidence.
+- Source: Folder-structured dataset with grayscale images per emotion class.
+- Processing:
+  - Resize and normalize each image.
+  - Assign labels based on folder names (e.g., "Happily Surprised", "Angrily Disgusted").
+  - Split into **80% training**, **10% validation**, **10% test**.
+- Output: Saved as `compound_emotion_cleaned.mat` for easy loading.
 
 ---
 
-## 📊 Model Insights
+## 🧠 CNN Model Training
 
-- **Accuracy** and **Confusion Matrix** images are included for performance overview.
-- Compound emotions like *Happy-Surprise*, *Anger-Disgust* are supported.
-- Confidence levels and emoji feedback help visualize predictions.
+- Framework: MATLAB
+- Input: `compound_emotion_cleaned.mat`
+- Key Features:
+  - Data augmentation (rotation, flips)
+  - Compact CNN (3 layers: Conv → ReLU → Pool)
+  - Optimizer: Adam
+  - Early stopping, L2 regularization
+  - Confusion matrix and accuracy computed on test set
+- Output: `EmotionRecognitionModel.mat`
+
+### 📊 Accuracy Visualization
+
+![Model Accuracy](accuracy.jpg)
+
+### 🔄 Confusion Matrix
+
+![Confusion Matrix](confusion.jpg)
+
+### 📈 Training Progress Chart
+
+![Training Chart](training%20chart.jpg)
 
 ---
 
-## 📬 Future Improvements
+## 🖥️ Real-Time Emotion Detection GUI
 
-- Add support for more nuanced compound emotions.
-- Incorporate facial landmark visualization.
-- Expand dataset with more diverse samples.
+The `emotionRecognitionLive` function is a live detection system with:
+- 📷 **Webcam feed** capture and face detection
+- 🧠 **CNN-based emotion classification**
+- 📍 **Landmark-based inference** for robustness
+- 💬 **Optional Text-to-Speech** for detected emotions
+- 📊 **Confidence bars** + emotion label
+- 😊 **Emoji rendering** for visual feedback
+- 🎨 **Color-coded UI** based on emotion
+- 📸 **Screenshot capture** functionality
 
 ---
 
-## 📜 License
+## ▶️ Getting Started
 
-This project is for academic and research purposes. Please cite appropriately if used in publications.
+### 📦 Requirements
+- MATLAB R2021a+ (Deep Learning Toolbox recommended)
+- Webcam
+- Windows/macOS/Linux
+
+### 🚀 How to Run
+1. Launch MATLAB.
+2. Open and run: `EMOTION_DETECTION_GUI_APP.m`
+3. Ensure webcam permissions are granted.
+4. Observe real-time emotion detection and visualization.
+
+---
+
+## 💡 Future Enhancements
+
+- Expand compound emotion classes with more nuanced categories
+- Improve landmark-based inference with DLIB or MediaPipe integration
+- Port model to Python (e.g., using TensorFlow.js or OpenCV GUI)
+
+---
+
+## 🧾 License
+
+This project is for academic and non-commercial use only. Please cite the author if used in publications or projects.
 
 ---
 
 ## 👤 Author
 
-Developed by [ayushsingh08-ds](https://github.com/ayushsingh08-ds)
+**Ayush Singh**  
+GitHub: [@ayushsingh08-ds](https://github.com/ayushsingh08-ds)
